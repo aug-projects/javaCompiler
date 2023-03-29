@@ -1,0 +1,8 @@
+PROGRAM ONE ;
+VAR A , B , C : INTEGER ;
+VAR D : BOOLEAN;
+
+BEGIN
+A := 3 ;
+B := A + 5 ;
+END .
