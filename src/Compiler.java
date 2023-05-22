@@ -90,9 +90,15 @@ public class Compiler {
         frame.setVisible(true);
     }
 
+    public static void displayPascalGrammarError(List<Token> tokens) {
+        PascalGrammar pascalGrammar = new PascalGrammar(tokens);
+        JOptionPane.showMessageDialog(null, pascalGrammar.error);
+    }
+
     public static void main(String[] args) throws IOException {
         List<Token> tokens = tokenize(readCodeFromFile());
 
         displayTokensInTable(tokens);
+        displayPascalGrammarError(tokens);
     }
 }
