@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.List;
 
 class PascalGrammar {
     int currentIndex = 0;
@@ -26,53 +26,55 @@ class PascalGrammar {
     }
 
     public void parseDeclarations() {
-        if (currentToken.getName().equals("var")) {
+        if (currentToken.getName().equals("VAR")) {
             parseDeclarationsRecursive();
         }
     }
 
     public void parseDeclarationsRecursive() {
-        matchToken("var", Token.TokenType.KEYWORD);
+        matchToken("VAR", Token.TokenType.KEYWORD);
         parseIdentifierList();
         matchToken(":", Token.TokenType.KEYWORD);
         parseType();
         matchToken(";", Token.TokenType.KEYWORD);
 
-        if (currentToken.getName().equals("var")) {
+        if (currentToken.getName().equals("VAR")) {
             parseDeclarationsRecursive();
         }
     }
 
+
     public void parseType() {
-        if (currentToken.getName().equals("integer") || currentToken.getName().equals("boolean")) {
+        if (currentToken.getName().equals("INTEGER") || currentToken.getName().equals("BOOLEAN")) {
             parseStandardType();
         }
 
-        if (currentToken.getName().equals("array")) {
-            matchToken("array", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("ARRAY")) {
+            matchToken("ARRAY", Token.TokenType.KEYWORD);
             matchToken("[", Token.TokenType.KEYWORD);
             matchToken(currentToken.getName(), Token.TokenType.NUMERIC_CONSTANT);
             matchToken(".", Token.TokenType.KEYWORD);
             matchToken(".", Token.TokenType.KEYWORD);
             matchToken(currentToken.getName(), Token.TokenType.NUMERIC_CONSTANT);
             matchToken("]", Token.TokenType.KEYWORD);
-            matchToken("of", Token.TokenType.KEYWORD);
+            matchToken("OF", Token.TokenType.KEYWORD);
             parseStandardType();
         }
     }
 
+
     public void parseStandardType() {
-        if (currentToken.getName().equals("integer")) {
-            matchToken("integer", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("INTEGER")) {
+            matchToken("INTEGER", Token.TokenType.KEYWORD);
         }
 
-        if (currentToken.getName().equals("boolean")) {
-            matchToken("boolean", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("BOOLEAN")) {
+            matchToken("BOOLEAN", Token.TokenType.KEYWORD);
         }
     }
 
     public void parseSubProgramDeclarations() {
-        if (currentToken.getName().equals("function") || currentToken.getName().equals("procedure")) {
+        if (currentToken.getName().equals("FUNCTION") || currentToken.getName().equals("PROCEDURE")) {
             parseSubProgramDeclarationsRecursive();
         }
     }
@@ -81,7 +83,7 @@ class PascalGrammar {
         parseSubProgramDeclaration();
         matchToken(";", Token.TokenType.KEYWORD);
 
-        if (currentToken.getName().equals("function") || currentToken.getName().equals("procedure")) {
+        if (currentToken.getName().equals("FUNCTION") || currentToken.getName().equals("PROCEDURE")) {
             parseSubProgramDeclarationsRecursive();
         }
     }
@@ -93,8 +95,8 @@ class PascalGrammar {
     }
 
     public void parseSubProgramHead() {
-        if (currentToken.getName().equals("function")) {
-            matchToken("function", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("FUNCTION")) {
+            matchToken("FUNCTION", Token.TokenType.KEYWORD);
             matchToken(currentToken.getName(), Token.TokenType.IDENTIFIER);
             parseArgument();
             matchToken(":", Token.TokenType.KEYWORD);
@@ -102,8 +104,8 @@ class PascalGrammar {
             matchToken(";", Token.TokenType.KEYWORD);
         }
 
-        if (currentToken.getName().equals("procedure")) {
-            matchToken("procedure", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("PROCEDURE")) {
+            matchToken("PROCEDURE", Token.TokenType.KEYWORD);
             matchToken(currentToken.getName(), Token.TokenType.IDENTIFIER);
             parseArgument();
             matchToken(";", Token.TokenType.KEYWORD);
@@ -134,13 +136,13 @@ class PascalGrammar {
     }
 
     public void parseCompoundStatement() {
-        matchToken("begin", Token.TokenType.KEYWORD);
+        matchToken("BEGIN", Token.TokenType.KEYWORD);
         parseOptionalStatements();
-        matchToken("end", Token.TokenType.KEYWORD);
+        matchToken("END", Token.TokenType.KEYWORD);
     }
 
     public void parseOptionalStatements() {
-        if (!currentToken.getName().equals("end")) {
+        if (!currentToken.getName().equals("END")) {
             parseStatementList();
         }
     }
@@ -163,18 +165,18 @@ class PascalGrammar {
 
     public void parseStatement() {
         switch (currentToken.getName()) {
-            case "begin" -> parseCompoundStatement();
-            case "for" -> {
-                matchToken("for", Token.TokenType.KEYWORD);
+            case "BEGIN" -> parseCompoundStatement();
+            case "FOR" -> {
+                matchToken("FOR", Token.TokenType.KEYWORD);
                 parseExpression();
                 parseStatement();
             }
-            case "if" -> {
-                matchToken("if", Token.TokenType.KEYWORD);
+            case "IF" -> {
+                matchToken("IF", Token.TokenType.KEYWORD);
                 parseExpression();
-                matchToken("then", Token.TokenType.KEYWORD);
+                matchToken("THEN", Token.TokenType.KEYWORD);
                 parseStatement();
-                matchToken("else", Token.TokenType.KEYWORD);
+                matchToken("ELSE", Token.TokenType.KEYWORD);
                 parseStatement();
             }
             default -> parseVariableOrProcedureStatement();
@@ -281,8 +283,8 @@ class PascalGrammar {
             matchToken(")", Token.TokenType.KEYWORD);
         }
 
-        if (currentToken.getName().equals("not")) {
-            matchToken("not", Token.TokenType.KEYWORD);
+        if (currentToken.getName().equals("NOT")) {
+            matchToken("NOT", Token.TokenType.KEYWORD);
             parseFactor();
         }
     }
@@ -353,9 +355,8 @@ class PascalGrammar {
         };
     }
 
-
     public void handleProgram() {
-        matchToken("program", Token.TokenType.KEYWORD);
+        matchToken("PROGRAM", Token.TokenType.KEYWORD);
         matchToken(currentToken.getName(), Token.TokenType.IDENTIFIER);
         matchToken(";", Token.TokenType.KEYWORD);
         parseDeclarations();
