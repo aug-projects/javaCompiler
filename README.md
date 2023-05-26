@@ -5,4 +5,4 @@ The provided program is a basic Java compiler that tokenizes code and displays t
 ## Screenshot
 
 ![image](https://user-images.githubusercontent.com/37311945/228672250-4238ad35-c81f-440d-a051-b6dc870bbc25.png)
-![image](https://github.com/aug-projects/javaCompiler/assets/37311945/07d3e28f-ca02-4a22-95f0-6c6f3794f119)
+![image](https://github.com/aug-projects/javaCompiler/assets/37311945/1e9f5d26-c465-481a-8289-b55f5e59e84d)
