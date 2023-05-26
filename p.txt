@@ -1,8 +1,15 @@
-PROGRAM ONE ;
-VAR A , B , C : INTEGER ;
-VAR D : BOOLEAN;
+PROGRAM EXAMPLE ;
+VAR
+  X , Y : INTEGER ;
+FUNCTION GCD ( A , B : INTEGER ) : INTEGER ;
+BEGIN
+  IF B = 0 THEN
+    GCD := A
+  ELSE
+    GCD := GCD( B , A MOD B ) ;
+END ;
 
 BEGIN
-A := 3 ;
-B := A + 5 ;
+  READ ( X , Y ) ;
+  WRITE ( GCD ( X , Y ) ) ;
 END .
